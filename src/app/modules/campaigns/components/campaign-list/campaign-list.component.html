@@ -1,0 +1,40 @@
+<div class="flex">
+  <div class="flex-grid w-100">
+    <div class="grid-headers flex">
+      <div class="flex-2">DATE</div>
+      <div class="flex-3">CAMPAIGN</div>
+      <div class="flex-1">VIEW</div>
+      <div class="flex-3">ACTIONS</div>
+    </div>
+    <div *ngFor="let campaign of campaignList"
+      class="grid-item flex"
+      (click)="onSelectCampaign($event, campaign)">
+      <div class="flex-2  "
+        style="flex-direction: column; justify-content: center; align-items: flex-start">
+        {{campaign.created_on | date : 'yyyy-mm-dd' }}
+        <p class="w-100"
+          style="padding: 0; margin: 0;margin-top: 5px"> {{campaign.created_on | customDate}}</p>
+      </div>
+      <div class="flex-3">{{campaign.campaign_name}}</div>
+      <div class="flex-1">{{campaign.pricing}}</div>
+      <div class="flex-3">
+        <img src="../../../../../assets/images/csv.png">
+        <img src="../../../../../assets/images/signal.jpeg">
+        <img src="../../../../../assets/images/cal.png">
+
+        <p-calendar (click)='onSelectCal($event)'
+          [(ngModel)]="campaign.created_on"></p-calendar>
+
+      </div>
+
+    </div>
+  </div>
+
+  <p-dialog header="Selected Campaign"
+    [(visible)]="displayDetails"
+    modal="true">
+    <div style="min-width: 500px;height: 200px;  display: flex; justify-content: center; align-items: center">
+      {{selectedCampaign.campaign_description}}
+    </div>
+  </p-dialog>
+</div>
